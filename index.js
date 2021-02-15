@@ -4,29 +4,30 @@ const punchlineBtn = document.getElementById("punchlineBtn");
 const newJokeBtn = document.getElementById("newJokeBtn");
 let punchline;
 
-punchlineBtn.addEventListener("click", () => {
-  getPunchline();
-});
+punchlineBtn.addEventListener('click', getPunchline);
+
+newJokeBtn.addEventListener('click', getJoke);
 
 function getPunchline() {
-  punchlineDiv.innerText = punchline;
-  punchlineDiv.classList.add("bubble");
-  punchlineBtn.classList.toggle("hidden");
-  newJokeBtn.classList.toggle("hidden");
+    punchlineDiv.innerHTML = punchline;
+    punchlineDiv.classList.add('bubble2');
+    punchlineBtn.classList.toggle('hidden');
+    newJokeBtn.classList.toggle('hidden');
 }
 
 async function getJoke() {
-  const jokePromise = await fetch(
-    "https://official-joke-api.appspot.com/jokes/programming/random"
-  );
-  const joke = await jokePromise.json();
-
-  setupDiv.innerHTML = joke[0].setup;
-
-  punchline = joke[0].punchline;
-
-  punchlineBtn.classList.toggle("hidden");
-  newJokeBtn.classList.toggle("hidden");
+    const jokePromise = await fetch('https://official-joke-api.appspot.com/jokes/programming/random');
+    const joke = await jokePromise.json();
+    
+    setupDiv.innerHTML = joke[0].setup;
+    
+    punchline = joke[0].punchline;
+    
+    punchlineDiv.innerHTML = "";
+    punchlineDiv.classList.remove('bubble2');
+    
+    punchlineBtn.classList.toggle('hidden');
+    newJokeBtn.classList.toggle('hidden');
 }
 
 getJoke();
